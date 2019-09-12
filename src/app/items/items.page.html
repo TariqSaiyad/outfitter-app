@@ -1,0 +1,78 @@
+<!-- This is the header for this page, contains the sign out and search button -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>My Items</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/search-items">
+        <ion-icon size="large" name="search"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/home" (click)="signOut()">
+        <ion-icon size="large" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- This is the content that displays the buttons for selecting the different categories -->
+<ion-content class="card-background-page background" *ngIf="afAuth.auth.currentUser && !selectedMenu">
+
+  <!-- This displays the weather info, it is clickable -->
+  <ion-card class="weatherCSS" *ngIf="weatherObject" button="true" (click)="showWeatherPopover()">
+    <article class="widget">
+      <div class="weatherIcon"><img class="weather"
+          src="http://openweathermap.org/img/wn/{{weatherObject.weather[0].icon}}@2x.png" alt=""></div>
+      <div class="weatherInfo">
+        <div class="temperature"><span>{{temp}}&deg;</span></div>
+        <div class="description">
+          <div class="weatherCondition"> {{weatherObject.weather[0].description}}</div>
+          <div class="place"> {{weatherObject.name}}</div>
+        </div>
+      </div>
+    </article>
+  </ion-card>
+
+  <!-- All the buttons with custom CSS for the categories -->
+  <ion-button class="shirts larger" size="large" fill="outline" expand="full" color="light"
+    (click)="setSelected('Shirts')">Shirts & Tops</ion-button>
+  <ion-button class="hoodies larger" size="large" fill="outline" expand="full" color="light"
+    (click)="setSelected('Hoodies')">Hoodies</ion-button>
+  <ion-button class="pants larger" size="large" fill="outline" expand="full" color="light"
+    (click)="setSelected('Pants')">Pants</ion-button>
+  <ion-button class="shorts larger" size="large" fill="outline" expand="full" color="light"
+    (click)="setSelected('Shorts')">Shorts</ion-button>
+  <ion-button class="jackets larger" size="large" fill="outline" expand="full" color="light"
+    (click)="setSelected('Jackets')">Jackets</ion-button>
+  <ion-button class="shoes larger" size="large" fill="outline" expand="full" color="light"
+    (click)="setSelected('Shoes')">Shoes</ion-button>
+  <ion-button class="acc larger" size="large" fill="outline" expand="full" color="light"
+    (click)="setSelected('Accessories')">Accessories</ion-button>
+
+</ion-content>
+
+<!-- This content container is displayed when the user selects a category -->
+<ion-content *ngIf="afAuth.auth.currentUser && selectedMenu">
+  <!-- Here, the items in that category will be diplayed -->
+  <ion-toolbar color="light">
+    <ion-title>{{selectedMenu}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="backToItemsPage()">
+        <ion-icon size="large" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Display all the filtered items in this grid, they can be opened using a popover -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let item of filteredItems">
+        <ion-card color="light" button="true" (click)="showPopover(item)">
+          <img src="{{item.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

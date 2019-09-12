@@ -1,0 +1,95 @@
+<!-- Header for the search page, allows user to go back to items page -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Search Items</ion-title>
+    <!-- Badge to show the number of items -->
+    <ion-badge slot="end" style="margin:1em" color="dark">{{searchItems.length}}</ion-badge>
+    <!-- back button -->
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home/items">
+        <ion-icon size="large" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <!-- clear all filters -->
+    <ion-chip color="dark" slot="end" (click)="clearFilters()">
+      <ion-label>Clear</ion-label>
+      <ion-icon name="close"></ion-icon>
+    </ion-chip>
+  </ion-toolbar>
+</ion-header>
+
+<!-- The content will show the input fields for filtering and the item cards at the 
+bottom -->
+<ion-content>
+
+  <!-- Search bar and form input -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card color="light">
+          <ion-list>
+            <ion-grid>
+
+              <ion-row>
+                <ion-searchbar placeholder="Enter item name" showCancelButton="focus" [(ngModel)]="searchValue"
+                  (ionChange)="search()" (ionCancel)="onSearchCancel()" (ionClear)="onSearchCancel()"></ion-searchbar>
+              </ion-row>
+
+              <ion-row>
+                <ion-col>
+
+                  <ion-item>
+                    <ion-label>Category</ion-label>
+                    <ion-select (ionChange)="filterResults()" name="categoryInput" [(ngModel)]="categoryInput"
+                      interface="popover">
+                      <ion-select-option *ngFor="let item of categories" value={{item}}>{{item}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Color</ion-label>
+                    <ion-select (ionChange)="filterResults()" name="colorInput" [(ngModel)]="colorInput"
+                      interface="popover">
+                      <ion-select-option *ngFor="let item of colors" value={{item}}> {{item}} </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Dress Code</ion-label>
+                    <ion-select (ionChange)="filterResults()" name="dressCodeInput" [(ngModel)]="dressCodeInput"
+                      interface="popover">
+                      <ion-select-option *ngFor="let item of dressCode" value={{item}}> {{item}} </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                  <ion-item>
+                    <ion-label>Type</ion-label>
+                    <ion-select (ionChange)="filterResults()" name="clothingTypeInput" [(ngModel)]="clothingTypeInput"
+                      interface="popover">
+                      <ion-select-option *ngFor="let item of clothingTypes" value={{item}}> {{item}}
+                      </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <!-- Item cards here -->
+    <ion-row>
+      <ion-col size="6" *ngFor="let item of searchItems">
+        <ion-card color="light" button="true" (click)="showPopover(item)">
+          <img src="{{item.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

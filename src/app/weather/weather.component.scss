@@ -1,0 +1,56 @@
+.weatherCSS {
+  .widget {
+    display: flex;
+    width: inherit;
+    height: inherit;
+    flex-wrap: wrap;
+    cursor: pointer;
+
+    box-shadow: 0 27px 55px 0 rgba(0, 0, 0, 0.3), 0 17px 17px 0 rgba(0, 0, 0, 0.15);
+
+    .weatherIcon {
+      height: 60%;
+      width: 20%;
+      background: var(--ion-color-tertiary);
+      display: inherit;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    .weatherInfo {
+      width: 80%;
+      // background: #080705;
+      background: var(--ion-color-light);
+      display: inherit;
+      align-items: center;
+      color: var(--ion-color-dark);
+
+      .temperature {
+        width: 48%;
+        height: inherit;
+        font-size: 4em;
+        display: inherit;
+        margin-left: 0.2em;
+      }
+
+      .description {
+        text-transform: uppercase;
+        display: inherit;
+        flex-direction: column;
+        width: 100%;
+        justify-content: left;
+
+        .weatherCondition {
+          text-transform: uppercase;
+          font-size: 1.5em;
+        }
+
+        .place {
+          font-size: 1em;
+          padding-top: 0.4em;
+        }
+      }
+    }
+  }
+}
+

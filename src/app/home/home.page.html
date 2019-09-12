@@ -1,0 +1,41 @@
+<!-- This is the login page, shown when user has not logged in -->
+<ion-content>
+  <img *ngIf="!afAuth.auth.currentUser" src="../../assets/logo.png">
+  <!-- This is the firebase UI for login -->
+  <firebase-ui class="white-text" (signInSuccessWithAuthResult)="successCallback($event)"></firebase-ui>
+
+  <!-- This is shown when the user has logged in -->
+  <ion-content *ngIf="afAuth.auth.currentUser">
+    <!-- This is the tab component  -->
+    <ion-tabs>
+      <ion-tab-bar slot="bottom" color="dark">
+        <ion-tab-button tab="items">
+          <ion-icon name="pricetags"></ion-icon>
+          <ion-label>Items</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="outfits">
+          <ion-icon name="shirt"></ion-icon>
+          <ion-label>Outfits</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+
+    <!-- The FAB buttons  -->
+    <ion-fab horizontal="center" vertical="bottom" slot="fixed">
+      <ion-fab-button color="tertiary">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-fab-button routerLink="/add-item" routerDirection="forward" color="light">
+          <ion-icon name="pricetags"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-button routerLink="/add-outfit" routerDirection="forward" color="light">
+          <ion-icon name="shirt"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+
+
+
+  </ion-content>

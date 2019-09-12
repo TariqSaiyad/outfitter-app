@@ -1,0 +1,65 @@
+<!-- This is the header for the weather page. -->
+<ion-toolbar color="tertiary">
+  <ion-title>Recommended Items</ion-title>
+  <ion-buttons slot="start">
+    <ion-button slot="start" (click)="close()">
+      <ion-icon size="large" name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<!-- The content will show the weather information and the recommended items 
+for that weather. -->
+<ion-content color="dark">
+  <ion-card class="weatherCSS" *ngIf="weatherObject">
+    <article class="widget">
+      <div class="weatherIcon"><img class="weather"
+          src="http://openweathermap.org/img/wn/{{weatherObject.weather[0].icon}}@2x.png" alt=""></div>
+      <div class="weatherInfo">
+        <div class="temperature"><span>{{temp}}&deg;</span></div>
+        <div class="description">
+          <div class="weatherCondition"> {{weatherObject.weather[0].description}}</div>
+          <div class="place"> {{weatherObject.name}}</div>
+        </div>
+      </div>
+    </article>
+  </ion-card>
+
+  <!-- Use ionic slides to navigate the different items -->
+  <ion-slides pager="true" [options]="slideOpts">
+    <ion-slide *ngFor="let item of filteredItems">
+
+      <ion-card color="light">
+        <img src="{{item.payload.doc.data().picture}}" />
+        <ion-card-header>
+          <ion-card-title> {{item.payload.doc.data().name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-item color="light">
+            <ion-label>Category</ion-label>
+            <ion-label slot="end"> {{item.payload.doc.data().category}}</ion-label>
+          </ion-item>
+
+          <ion-item color="light">
+            <ion-label>Color</ion-label>
+            <ion-label slot="end" class="{{item.payload.doc.data().color}}-text"> {{item.payload.doc.data().color}}
+            </ion-label>
+          </ion-item>
+
+          <ion-item color="light">
+            <ion-label>Dress Code</ion-label>
+            <ion-label slot="end"> {{item.payload.doc.data().dressCode}}</ion-label>
+          </ion-item>
+
+          <ion-item color="light">
+            <ion-label>Clothing Type</ion-label>
+            <ion-label slot="end"> {{item.payload.doc.data().clothingType}}</ion-label>
+          </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

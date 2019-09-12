@@ -1,0 +1,13 @@
+.active-item {
+  border-left: 8px solid var(--ion-color-primary);
+}
+
+ion-content {
+  --background: url(../../assets/bgNew.png);
+  --background-size:cover;
+}
+
+img{
+    padding-top: 20%;
+    padding-bottom:10%;
+}

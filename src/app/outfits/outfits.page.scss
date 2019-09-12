@@ -1,0 +1,27 @@
+.card-background-page {
+  ion-card.noBg {
+    background: none !important;
+    // background-image: url("../../assets/bg.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    text-align: center;
+  }
+}
+
+ion-content {
+  --background: url(../../assets/bgNew.png);
+  --background-size: cover;
+}
+
+ion-card {
+  .img {
+    padding: 10;
+    margin: 10;
+  }
+}
+
+ion-col{
+  padding: 0;
+}

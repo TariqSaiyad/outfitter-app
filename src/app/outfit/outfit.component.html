@@ -1,0 +1,71 @@
+<!-- The header for this component, with close button and name -->
+<ion-toolbar color="tertiary">
+  <ion-title>{{outfitName}}</ion-title>
+  <ion-buttons slot="start">
+    <ion-button slot="start" (click)="close()">
+      <ion-icon size="large" name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<!-- This content container will show the outfit items and a delete button -->
+<ion-content color="dark">
+  <!-- All items in this outfit displayed using grid system. The grid will adjust
+according to the number of layers/accessories-->
+  <ion-grid>
+
+    <ion-row>
+      <ion-col size="12/{{accessories.length}}" *ngFor="let item of accessories">
+        <ion-card color="light" button="true" (click)="showItemPopover(item)">
+          <img src="{{item.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+
+      <ion-col size="12/{{layers.length}}" *ngFor="let item of layers">
+        <ion-card color="light" button="true" (click)="showItemPopover(item)">
+          <img src="{{item.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-card color="light" button="true" (click)="showItemPopover(pants)">
+          <img src="{{pants.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{pants.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-card color="light" button="true" (click)="showItemPopover(shoes)">
+          <img src="{{shoes.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{shoes.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-button size="large" color="danger" expand="full" (click)="deleteOutfit()">
+          <ion-label>Delete</ion-label>
+          <ion-icon slot="end" size="medium" name="trash"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

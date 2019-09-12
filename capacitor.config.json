@@ -1,0 +1,7 @@
+{
+  "appId": "com.tariq.outfitter",
+  "appName": "outfitter",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

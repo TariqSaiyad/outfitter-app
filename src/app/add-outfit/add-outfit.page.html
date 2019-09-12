@@ -1,0 +1,160 @@
+<!-- The header  -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Add New Outfit</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home/items">
+        <ion-icon size="large" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- This content will show the main outfit creator page -->
+<ion-content *ngIf="!selectedOption">
+
+  <!-- FAB for adding items -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="openMenu()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <!-- Grid that shows the different categories, it will be replaces
+  by the actual item when user selects it -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3" *ngIf="accessories.length==0"></ion-col>
+      <ion-col size="6" *ngIf="accessories.length==0">
+        <ion-card class="ion-text-center" color="danger">
+          <ion-card-header>
+            <ion-card-title>Missing Accessories</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3" *ngIf="accessories.length==0"></ion-col>
+
+      <ion-col size="12/{{accessories.length}}" *ngFor="let item of accessories">
+        <ion-card color="light" button="true" (click)="showPopover(item)">
+
+          <ion-buttons class="ion-float-right">
+            <ion-button color="danger" (click)="accessories.splice(accessories.indexOf(item),1)">
+              <ion-icon size="small" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+          <img src="{{item.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3" *ngIf="layers.length==0"></ion-col>
+      <ion-col size="6" *ngIf="layers.length==0">
+        <ion-card class="ion-text-center" color="danger">
+          <ion-card-header>
+            <ion-card-title>Missing Layers</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3" *ngIf="layers.length==0"></ion-col>
+
+
+      <ion-col size="12/{{layers.length}}" *ngFor="let item of layers">
+        <ion-card color="light" button="true" (click)="showPopover(item)">
+          <ion-buttons class="ion-float-right">
+            <ion-button color="danger" (click)="layers.splice(layers.indexOf(item),1)">
+              <ion-icon size="small" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <img src="{{item.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+
+      <ion-col size="3"></ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-text-center" color="danger" *ngIf="!pants">
+          <ion-card-header>
+            <ion-card-title>Missing Pants</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+
+        <ion-card color="light" button="true" *ngIf="pants" (click)="showPopover(pants)">
+          <ion-buttons class="ion-float-right">
+            <ion-button color="danger" (click)="pants=null">
+              <ion-icon size="small" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <img src="{{pants.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{pants.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3"></ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3"></ion-col>
+      <ion-col size="6">
+        <ion-card class="ion-text-center" color="danger" *ngIf="!shoes">
+          <ion-card-header>
+            <ion-card-title>Missing Shoes</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+        <ion-card color="light" button="true" *ngIf="shoes" (click)="showPopover(shoes)">
+          <ion-buttons class="ion-float-right">
+            <ion-button color="danger" (click)="shoes=null">
+              <ion-icon size="small" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+          <img src="{{shoes.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{shoes.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="3"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!-- This content is displayed when the user selects a category to
+  choose from. -->
+<ion-content class="background" *ngIf="selectedOption">
+  <ion-toolbar color="light">
+    <ion-title>{{selectedMenu}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon size="large" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Show all the items in the selected category -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let item of filteredItems">
+
+        <ion-card color="light" button="true" (click)="selectItem(item)">
+          <img src="{{item.payload.doc.data().picture}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.payload.doc.data().name}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

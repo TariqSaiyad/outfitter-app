@@ -1,0 +1,53 @@
+<!-- The header for this page, similar to items page -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>My Outfits</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/search-items">
+        <ion-icon size="large" name="search"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/home" (click)="signOut()">
+        <ion-icon size="large" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- This container will show the outfits that the user has, 
+using the card component. These are clickable -->
+<ion-content *ngIf="afAuth.auth.currentUser">
+  <!-- The "im feeling lucky" feature -->
+  <ion-card color="light" button="true" (click)="feelingLucky()">
+    <ion-card-header>
+      <ion-card-title>I'm Feeling Lucky</ion-card-title>
+      <ion-card-subtitle>Get a random outfit made for you</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <!-- This will show all the outfits -->
+  <div *ngFor="let outfit of outfits">
+
+    <!-- Shoes 3 images for the overview of this outfit -->
+    <ion-card color="light" button="true" (click)="showPopover(outfit)">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" *ngIf="outfit.layers[0]">
+            <img src="{{outfit.layers[0].payload.doc.data().picture}}" />
+          </ion-col>
+          <ion-col size="4" *ngIf="outfit.pants">
+            <img src="{{outfit.pants.payload.doc.data().picture}}" />
+          </ion-col>
+          <ion-col size="4" *ngIf="outfit.shoes">
+            <img src="{{outfit.shoes.payload.doc.data().picture}}" />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- name of outfit here -->
+      <ion-card-header>
+        <ion-card-title>{{outfit.outfitName}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
+
+  </div>
+
+</ion-content>

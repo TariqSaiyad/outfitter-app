@@ -1,0 +1,42 @@
+<!-- This is the header for the component, to close the popover -->
+<ion-toolbar color="tertiary">
+  <ion-title>{{name}}</ion-title>
+  <ion-buttons slot="start">
+    <ion-button slot="start" (click)="close()">
+      <ion-icon size="large" name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
+
+<!-- This is the content that contains the item info -->
+<ion-content color="dark">
+  <ion-card>
+    <img src="{{picture}}" />
+
+    <ion-list-header color="dark">
+      Item Details
+    </ion-list-header>
+
+    <ion-item color="dark">
+      <ion-label>Category</ion-label>
+
+      <ion-label slot="end"> {{category}}</ion-label>
+    </ion-item>
+
+    <ion-item color="dark">
+      <ion-label>Color</ion-label>
+      <ion-label slot="end" class="{{color}}-text"> {{color}}</ion-label>
+    </ion-item>
+
+    <ion-item color="dark">
+      <ion-label>Dress Code</ion-label>
+      <ion-label slot="end"> {{dressCode}}</ion-label>
+    </ion-item>
+
+    <ion-item color="dark">
+      <ion-label>Clothing Type</ion-label>
+      <ion-label slot="end"> {{clothingType}}</ion-label>
+    </ion-item>
+
+  </ion-card>
+</ion-content>

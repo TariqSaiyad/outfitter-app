@@ -1,0 +1,8 @@
+{
+  "name": "outfitter",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,74 @@
+<!-- This is the header -->
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>Add New Item</ion-title>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home/items">
+        <ion-icon size="large" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- This content shows the user input page for adding items -->
+<ion-content>
+  <!-- All the input fields are in a card container -->
+  <ion-card>
+    <!-- Each input is its own item component -->
+    <ion-item>
+      <ion-label position="floating">Item Name</ion-label>
+      <ion-input name="nameInput" [(ngModel)]="nameInput" required type="text"></ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="picture">
+      <img [src]="picture">
+    </ion-item>
+
+    <ion-item>
+      <ion-fab horizontal="end" slot="end">
+        <ion-fab-button size="small" color="tertiary" (click)="openCamera()">
+          <ion-icon name="camera" size="medium"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <ion-label>
+        Take Picture
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Category</ion-label>
+      <ion-select name="categoryInput" [(ngModel)]="categoryInput" interface="popover">
+        <ion-select-option *ngFor="let item of categories" value={{item}}>{{item}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Color</ion-label>
+      <ion-select name="colorInput" [(ngModel)]="colorInput" interface="popover">
+        <ion-select-option *ngFor="let item of colors" value={{item}}> {{item}} </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Dress Code</ion-label>
+      <ion-select name="dressCodeInput" [(ngModel)]="dressCodeInput" interface="popover">
+        <ion-select-option *ngFor="let item of dressCode" value={{item}}> {{item}} </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Clothing Type</ion-label>
+      <ion-select name="clothingTypeInput" [(ngModel)]="clothingTypeInput" interface="popover">
+        <ion-select-option *ngFor="let item of clothingTypes" value={{item}}> {{item}} </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-card>
+</ion-content>
+
+<!-- Footer has the button for adding the item -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-button size="large" fill="solid" expand="block" color="tertiary" (click)="addItem()">Add Item</ion-button>
+  </ion-toolbar>
+</ion-footer>
