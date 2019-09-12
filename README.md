@@ -11,8 +11,5 @@
 - use F12 to run it in mobile mode using Chrome Dev Tools
 - **Note**: the Speech recognition API is only avaiable on Chrome
 
-The login for the main account is: 
-
-- email: test@test.com
-- password: test123
+---
 
