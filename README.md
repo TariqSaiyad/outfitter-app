@@ -4,6 +4,8 @@
 
 **[Link to demo video](https://youtu.be/H3AIHTpFEqw)**
 
+<img src="src/assets/outfitter.png" alt="alt text" width="20%" height="20%">
+
 #### Notes:
 
 - to run the app, first install the node modules using `npm install`
